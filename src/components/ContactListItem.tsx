@@ -5,19 +5,19 @@ import { updateContact } from '../service';
 import { spinner } from '../spinner';
 
 
-interface Props {
+interface IProps {
     contact: IContact;
     onDelete: React.EventHandler<any>;
 }
 
-interface State {
+interface IState {
     isEditing: boolean;
     contact: IContact;
     defaultContact: IContact;
 }
 
-export default class ContactListItem extends React.Component<Props, State> {
-    constructor(props: Props) {
+export default class ContactListItem extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -69,14 +69,12 @@ export default class ContactListItem extends React.Component<Props, State> {
 
     private togleEditContact() {
         this.setState({
-            ...this.state,
             isEditing: !this.state.isEditing,
         });
     }
 
     private saveContact() {
         this.setState({
-            ...this.state,
             defaultContact: this.state.contact,
             isEditing: false,
         });
@@ -91,15 +89,13 @@ export default class ContactListItem extends React.Component<Props, State> {
 
     private cancelEdit() {
         this.setState({
-            ...this.state,
             contact: this.state.defaultContact,
             isEditing: false,
         });
     }
 
-    private onNameChange(event) {
+    private onNameChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            ...this.state,
             contact: {
                 ...this.state.contact,
                 name: event.target.value,
@@ -107,9 +103,8 @@ export default class ContactListItem extends React.Component<Props, State> {
         });
     }
 
-    private onPhoneChange(event) {
+    private onPhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            ...this.state,
             contact: {
                 ...this.state.contact,
                 phone: event.target.value,

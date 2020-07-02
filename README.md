@@ -1,24 +1,30 @@
 # Contact List
 
-Contact list app with authorization page.
+> Contact list app with authorization page
 
-Built using:
-* React
-* React Router
+Built with:
+- React
+- React Router
 
-Was tested on
-- node version 10.19.0
-- NPM version 6.14.4
+Tested on:
+- node: 10.19.0
+- NPM 6.14.4
+- Firefox 77.0.1
 
-## Start app
+## How to start
 
-* start frontend build
+Start frontend build
+
 `npm run start`
 
-* start json server
+Start json server
+
 `npm run server`
 
-address - localhost:1234
+Open browser
 
-username: admin
-password: pass
+[localhost:1234](localhost:1234)
+
+Credentials:
+- username - admin
+- password - pass

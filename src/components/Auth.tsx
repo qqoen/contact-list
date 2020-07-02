@@ -11,7 +11,7 @@ interface IState {
 }
 
 export default class Auth extends React.Component<unknown, IState> {
-    constructor(props) {
+    constructor(props: unknown) {
         super(props);
 
         this.state = {
@@ -67,7 +67,6 @@ export default class Auth extends React.Component<unknown, IState> {
                 location.href = '/contacts';
             }, () => {
                 this.setState({
-                    ...this.state,
                     error: 'Invalid username or password',
                 });
             })
@@ -76,16 +75,14 @@ export default class Auth extends React.Component<unknown, IState> {
             });
     }
 
-    private onUsernameChange(event) {
+    private onUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            ...this.state,
             username: event.target.value,
         });
     }
 
-    private onPasswordChange(event) {
+    private onPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            ...this.state,
             password: event.target.value,
         });
     }

@@ -2,14 +2,16 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import ContactListItem from './ContactListItem';
-import { IState, IContact } from '../types';
+import { IContact, IDomEvent } from '../types';
 import { getContacts, addContact, deleteContact } from '../service';
 import { spinner } from '../spinner';
 
 
-const initialState = {
-    contacts: [],
-};
+export interface IState {
+    contacts: IContact[];
+    newContact: IContact;
+    search: string;
+}
 
 export default class ContactList extends React.Component<unknown, IState> {
     private isAuthenticated = false;
@@ -17,12 +19,18 @@ export default class ContactList extends React.Component<unknown, IState> {
     constructor(props: unknown) {
         super(props);
 
-        this.state = initialState;
+        this.state = {
+            contacts: [],
+            newContact: {
+                name: '',
+                phone: '',
+            },
+            search: '',
+        };
 
         this.addContact = this.addContact.bind(this);
         this.logout = this.logout.bind(this);
-
-        this.init();
+        this.onSearch = this.onSearch.bind(this);
     }
 
     public render() {
@@ -31,7 +39,20 @@ export default class ContactList extends React.Component<unknown, IState> {
         const page = (
             <div className="contact-list panel">
                 <h1 className="title">Contact List</h1>
-                <button className="button" onClick={this.addContact}>Add new contact</button>
+
+                <div className="panel">
+                    <input type="text" className="input" placeholder="Name" />
+                    <input type="text" className="input" placeholder="Phone" />
+                    <button className="button" onClick={this.addContact}>Add new contact</button>
+                </div>
+
+                <div>
+                    <input
+                        type="text"
+                        className="input"
+                        placeholder="Search..."
+                        onChange={this.onSearch} />
+                </div>
 
                 <ul>
                     {contacts.map((contact) => (
@@ -60,7 +81,7 @@ export default class ContactList extends React.Component<unknown, IState> {
         }
     }
 
-    private init() {
+    public componentDidMount() {
         spinner.start();
 
         getContacts()
@@ -86,7 +107,7 @@ export default class ContactList extends React.Component<unknown, IState> {
                 newContact.id = data.id;
 
                 this.setState({
-                    contacts: this.state.contacts.concat([newContact])
+                    contacts: this.state.contacts.concat([newContact]),
                 });
             })
             .finally(() => {
@@ -110,5 +131,11 @@ export default class ContactList extends React.Component<unknown, IState> {
     private logout() {
         localStorage.setItem('token', undefined);
         location.href = '/';
+    }
+
+    private onSearch(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            search: event.target.value,
+        });
     }
 }
