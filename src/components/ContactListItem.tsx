@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import ContactForm from './ContactForm';
 import { IContact } from '../types';
 import { updateContact } from '../service';
 import { spinner } from '../spinner';
@@ -25,31 +26,16 @@ export default class ContactListItem extends React.Component<IProps, IState> {
             contact: this.props.contact,
             defaultContact: this.props.contact,
         };
-
-        this.togleEditContact = this.togleEditContact.bind(this);
-        this.saveContact = this.saveContact.bind(this);
-        this.cancelEdit = this.cancelEdit.bind(this);
-        this.onNameChange = this.onNameChange.bind(this);
-        this.onPhoneChange = this.onPhoneChange.bind(this);
     }
 
     public render() {
         if (this.state.isEditing) {
             return (
                 <li>
-                    <div>
-                        <input
-                            type="text"
-                            value={this.state.contact.name}
-                            className="input"
-                            onChange={this.onNameChange} />
-
-                        <input
-                            type="text"
-                            value={this.state.contact.phone}
-                            className="input"
-                            onChange={this.onPhoneChange} />
-                    </div>
+                    <ContactForm
+                        contact={this.state.contact}
+                        onNameChange={this.onNameChange}
+                        onPhoneChange={this.onPhoneChange} />
 
                     <button className="button" onClick={this.saveContact}>Save</button>
                     <button className="button" onClick={this.cancelEdit}>Cancel</button>
@@ -67,13 +53,13 @@ export default class ContactListItem extends React.Component<IProps, IState> {
         }
     }
 
-    private togleEditContact() {
+    private togleEditContact = () => {
         this.setState({
             isEditing: !this.state.isEditing,
         });
-    }
+    };
 
-    private saveContact() {
+    private saveContact = () => {
         this.setState({
             defaultContact: this.state.contact,
             isEditing: false,
@@ -85,25 +71,25 @@ export default class ContactListItem extends React.Component<IProps, IState> {
             .finally(() => {
                 spinner.stop();
             });
-    }
+    };
 
-    private cancelEdit() {
+    private cancelEdit = () => {
         this.setState({
             contact: this.state.defaultContact,
             isEditing: false,
         });
-    }
+    };
 
-    private onNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             contact: {
                 ...this.state.contact,
                 name: event.target.value,
             },
         });
-    }
+    };
 
-    private onPhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private onPhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             contact: {
                 ...this.state.contact,

@@ -19,10 +19,6 @@ export default class Auth extends React.Component<unknown, IState> {
             password: '',
             error: '',
         };
-
-        this.login = this.login.bind(this);
-        this.onUsernameChange = this.onUsernameChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
     }
 
     public render() {
@@ -58,7 +54,7 @@ export default class Auth extends React.Component<unknown, IState> {
         );
     }
 
-    private login() {
+    private login = () => {
         spinner.start();
 
         login(this.state.username, this.state.password)
@@ -73,19 +69,19 @@ export default class Auth extends React.Component<unknown, IState> {
             .finally(() => {
                 spinner.stop();
             });
-    }
+    };
 
-    private onUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             username: event.target.value,
         });
-    }
+    };
 
-    private onPasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             password: event.target.value,
         });
-    }
+    };
 
     private isValid() {
         return this.state.username !== '' && this.state.password !== '';

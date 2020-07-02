@@ -1,6 +1,6 @@
 # Contact List
 
-> Contact list app with authorization page
+> Contact list app with authorization page and basic CRUD operations
 
 Built with:
 - React
@@ -23,7 +23,7 @@ Start json server
 
 Open browser
 
-[localhost:1234](localhost:1234)
+[localhost:1234](http://localhost:1234)
 
 Credentials:
 - username - admin

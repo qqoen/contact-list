@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import ContactListItem from './ContactListItem';
-import { IContact, IDomEvent } from '../types';
+import ContactForm from './ContactForm';
+import { IContact } from '../types';
 import { getContacts, addContact, deleteContact } from '../service';
 import { spinner } from '../spinner';
 
@@ -15,6 +16,7 @@ export interface IState {
 
 export default class ContactList extends React.Component<unknown, IState> {
     private isAuthenticated = false;
+    private isLoaded = false;
 
     constructor(props: unknown) {
         super(props);
@@ -27,22 +29,28 @@ export default class ContactList extends React.Component<unknown, IState> {
             },
             search: '',
         };
-
-        this.addContact = this.addContact.bind(this);
-        this.logout = this.logout.bind(this);
-        this.onSearch = this.onSearch.bind(this);
     }
 
     public render() {
-        const contacts = this.state.contacts;
+        const search = this.state.search.toLocaleLowerCase();
+        const contacts = this.state.contacts
+            .filter((contact) => {
+                const name = contact.name.toLowerCase();
+                const phone = contact.phone.toLowerCase();
+
+                return name.includes(search) || phone.includes(search);
+            });
 
         const page = (
             <div className="contact-list panel">
                 <h1 className="title">Contact List</h1>
 
                 <div className="panel">
-                    <input type="text" className="input" placeholder="Name" />
-                    <input type="text" className="input" placeholder="Phone" />
+                    <ContactForm
+                        contact={this.state.newContact}
+                        onNameChange={this.onNewNameChange}
+                        onPhoneChange={this.onNewPhoneChange} />
+
                     <button className="button" onClick={this.addContact}>Add new contact</button>
                 </div>
 
@@ -71,13 +79,15 @@ export default class ContactList extends React.Component<unknown, IState> {
 
         if (this.isAuthenticated) {
             return page;
-        } else {
+        } else if (this.isLoaded) {
             return (
                 <div>
                     <h1>You are not authorized</h1>
                     <Link className="link" to="/">Login page</Link>
                 </div>
             );
+        } else {
+            return <div></div>;
         }
     }
 
@@ -94,10 +104,11 @@ export default class ContactList extends React.Component<unknown, IState> {
             })
             .finally(() => {
                 spinner.stop();
+                this.isLoaded = true;
             });
     }
 
-    private addContact() {
+    private addContact = () => {
         const newContact: IContact = { name: `New Contact`, phone: '' };
 
         spinner.start();
@@ -113,7 +124,7 @@ export default class ContactList extends React.Component<unknown, IState> {
             .finally(() => {
                 spinner.stop();
             });
-    }
+    };
 
     private deleteContact(id: number) {
         this.setState({
@@ -128,14 +139,22 @@ export default class ContactList extends React.Component<unknown, IState> {
             });
     }
 
-    private logout() {
+    private logout = () => {
         localStorage.setItem('token', undefined);
         location.href = '/';
-    }
+    };
 
-    private onSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    private onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             search: event.target.value,
         });
-    }
+    };
+
+    private onNewNameChange = () => {
+
+    };
+
+    private onNewPhoneChange = () => {
+
+    };
 }
