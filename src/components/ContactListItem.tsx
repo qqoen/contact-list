@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { IContact } from '../types';
 import { updateContact } from '../service';
+import { spinner } from '../spinner';
 
 
 interface Props {
@@ -80,7 +81,12 @@ export default class ContactListItem extends React.Component<Props, State> {
             isEditing: false,
         });
 
-        updateContact(this.state.contact);
+        spinner.start();
+
+        updateContact(this.state.contact)
+            .finally(() => {
+                spinner.stop();
+            });
     }
 
     private cancelEdit() {

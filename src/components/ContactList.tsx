@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ContactListItem from './ContactListItem';
 import { IState, IContact } from '../types';
 import { getContacts, addContact, deleteContact } from '../service';
+import { spinner } from '../spinner';
 
 
 const initialState = {
@@ -18,15 +19,10 @@ export default class ContactList extends React.Component<unknown, IState> {
 
         this.state = initialState;
 
-        getContacts()
-            .then((data) => {
-                this.isAuthenticated = true;
+        this.addContact = this.addContact.bind(this);
+        this.logout = this.logout.bind(this);
 
-                this.setState({
-                    contacts: data,
-                });
-            }, (response) => {
-            });
+        this.init();
     }
 
     public render() {
@@ -35,7 +31,7 @@ export default class ContactList extends React.Component<unknown, IState> {
         const page = (
             <div className="contact-list panel">
                 <h1 className="title">Contact List</h1>
-                <button className="button" onClick={this.addContact.bind(this)}>Add new contact</button>
+                <button className="button" onClick={this.addContact}>Add new contact</button>
 
                 <ul>
                     {contacts.map((contact) => (
@@ -48,7 +44,7 @@ export default class ContactList extends React.Component<unknown, IState> {
 
                 <hr/>
 
-                <Link className="link" to="/">Login page</Link>
+                <button className="button danger" onClick={this.logout}>Logout</button>
             </div>
         );
 
@@ -64,16 +60,38 @@ export default class ContactList extends React.Component<unknown, IState> {
         }
     }
 
+    private init() {
+        spinner.start();
+
+        getContacts()
+            .then((data) => {
+                this.isAuthenticated = true;
+
+                this.setState({
+                    contacts: data,
+                });
+            })
+            .finally(() => {
+                spinner.stop();
+            });
+    }
+
     private addContact() {
         const newContact: IContact = { name: `New Contact`, phone: '' };
 
-        addContact(newContact).then((data) => {
-            newContact.id = data.id;
+        spinner.start();
 
-            this.setState({
-                contacts: this.state.contacts.concat([newContact])
+        addContact(newContact)
+            .then((data) => {
+                newContact.id = data.id;
+
+                this.setState({
+                    contacts: this.state.contacts.concat([newContact])
+                });
+            })
+            .finally(() => {
+                spinner.stop();
             });
-        });
     }
 
     private deleteContact(id: number) {
@@ -81,6 +99,16 @@ export default class ContactList extends React.Component<unknown, IState> {
             contacts: this.state.contacts.filter((contact) => contact.id !== id),
         });
 
-        deleteContact(id);
+        spinner.start();
+
+        deleteContact(id)
+            .finally(() => {
+                spinner.stop();
+            });
+    }
+
+    private logout() {
+        localStorage.setItem('token', undefined);
+        location.href = '/';
     }
 }

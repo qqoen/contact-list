@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 import { login } from '../service';
+import { spinner } from '../spinner';
 
 
 interface IState {
@@ -21,11 +21,11 @@ export default class Auth extends React.Component<unknown, IState> {
         };
 
         this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
     }
-    render() {
+
+    public render() {
         return (
             <div className="auth panel">
                 <div className="auth-header">
@@ -33,9 +33,6 @@ export default class Auth extends React.Component<unknown, IState> {
                 </div>
 
                 <div className="auth-body">
-                    <div>Links:</div>
-                    <Link className="link" to="/contacts">- contact list</Link>
-
                     <input
                         type="text"
                         placeholder="Username"
@@ -52,14 +49,18 @@ export default class Auth extends React.Component<unknown, IState> {
                 </div>
 
                 <div className="auth-footer">
-                    <button className="button primary" onClick={this.login}>Login</button>
-                    <button className="button danger" onClick={this.logout}>Logout</button>
+                    <button
+                        className="button primary"
+                        onClick={this.login}
+                        disabled={!this.isValid()}>Login</button>
                 </div>
             </div>
         );
     }
 
-    login() {
+    private login() {
+        spinner.start();
+
         login(this.state.username, this.state.password)
             .then((data) => {
                 localStorage.setItem('token', data);
@@ -69,24 +70,27 @@ export default class Auth extends React.Component<unknown, IState> {
                     ...this.state,
                     error: 'Invalid username or password',
                 });
+            })
+            .finally(() => {
+                spinner.stop();
             });
     }
 
-    logout() {
-        localStorage.setItem('token', undefined);
-    }
-
-    onUsernameChange(event) {
+    private onUsernameChange(event) {
         this.setState({
             ...this.state,
             username: event.target.value,
         });
     }
 
-    onPasswordChange(event) {
+    private onPasswordChange(event) {
         this.setState({
             ...this.state,
             password: event.target.value,
         });
+    }
+
+    private isValid() {
+        return this.state.username !== '' && this.state.password !== '';
     }
 }
