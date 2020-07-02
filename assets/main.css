@@ -43,7 +43,7 @@ hr {
 .auth-footer {
     height: 20%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .auth-footer .button {
     width: 100px;
@@ -65,6 +65,10 @@ hr {
 .button:hover {
     opacity: 0.75;
     cursor: pointer;
+}
+.button[disabled] {
+    opacity: 0.75;
+    cursor: default;
 }
 .button.primary {
     background-color: #55f;
@@ -94,6 +98,7 @@ hr {
 
 .error {
     color: #f55;
+    text-align: center;
 }
 
 .contact-list {

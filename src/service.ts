@@ -7,7 +7,7 @@ const getHeaders = () => ({
 });
 
 const responseHandler = (response: Response) => {
-    if (response.status === 200) {
+    if (response.ok) {
         return response.json();
     } else {
         return Promise.reject(response);
