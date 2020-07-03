@@ -1,6 +1,8 @@
 const path = require('path')
 const jsonServer = require('json-server');
 
+const { password } = require('./password.js');
+
 const server = jsonServer.create();
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
 const middlewares = jsonServer.defaults();
@@ -9,7 +11,6 @@ const port = 3000;
 // Auth
 
 const username = 'admin';
-const password = 'pass';
 const token = 't' + Math.random().toString();
 
 function isUrlAuthorized(request) {
