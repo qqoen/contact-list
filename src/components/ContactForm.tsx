@@ -9,17 +9,21 @@ interface IProp {
     onPhoneChange: (value: string) => void;
 }
 
-export default function ContactForm(props: IProp) {
-    const maxInput = 10;
+const maxNameInput = 20;
+const maxPhoneInput = 10;
 
-    const onNameChange = (e) => {
-        const name = e.target.value.slice(0, maxInput);
+export default function ContactForm(props: IProp) {
+    const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const name = e.target.value.slice(0, maxNameInput);
+
         props.onNameChange(name);
     };
-    const onPhoneChange = (e) => {
+
+    const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const phone = e.target.value
             .replace(/[^0-9]/g, '')
-            .slice(0, maxInput);
+            .slice(0, maxPhoneInput);
+
         props.onPhoneChange(phone);
     };
 

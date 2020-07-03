@@ -8,9 +8,6 @@
     background-color: #fff;
     box-shadow: 1px 1px 4px black;
 }
-.panel.inner {
-    margin-bottom: 20px;
-}
 
 .auth {
     width: 250px;
@@ -106,6 +103,9 @@
 }
 .flex .item:not(:last-child) {
     margin-right: 10px;
+}
+.flex-between {
+    justify-content: space-between;
 }
 
 .label {

@@ -23,10 +23,10 @@ export default class Auth extends React.Component<unknown, IState> {
 
     public render() {
         return (
-            <div className="auth panel">
-                <div className="auth-header">
+            <section className="auth panel">
+                <header className="auth-header">
                     <h1 className="title">Auth</h1>
-                </div>
+                </header>
 
                 <div className="auth-body">
                     <input
@@ -48,13 +48,13 @@ export default class Auth extends React.Component<unknown, IState> {
                     <div className="error">{this.state.error}</div>
                 </div>
 
-                <div className="auth-footer">
+                <footer className="auth-footer">
                     <button
                         className="button primary"
                         onClick={this.login}
                         disabled={!this.isValid()}>Login</button>
-                </div>
-            </div>
+                </footer>
+            </section>
         );
     }
 

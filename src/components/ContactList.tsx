@@ -50,10 +50,10 @@ export default class ContactList extends React.Component<unknown, IState> {
         ));
 
         const page = (
-            <div className="contact-list panel">
+            <section className="contact-list panel">
                 <h1 className="title">Contact List</h1>
 
-                <div className="panel inner flex">
+                <div className="flex">
                     <div className="item">
                         <ContactForm
                             contact={this.state.newContact}
@@ -67,6 +67,8 @@ export default class ContactList extends React.Component<unknown, IState> {
                         disabled={!this.isAddFormValid()}>Add new contact</button>
                 </div>
 
+                <hr/>
+
                 <div className="flex">
                     <input
                         className="input item"
@@ -77,7 +79,8 @@ export default class ContactList extends React.Component<unknown, IState> {
                     
                     <button
                         className="button item"
-                        onClick={this.onClear}>Clear</button>
+                        onClick={this.onClear}
+                        disabled={this.state.search === ''}>Clear</button>
                 </div>
 
                 <ul className="list-container">{contactEls}</ul>
@@ -86,18 +89,22 @@ export default class ContactList extends React.Component<unknown, IState> {
 
                 <hr/>
 
-                <button className="button danger" onClick={this.logout}>Logout</button>
-            </div>
+                <footer className="flex flex-between">
+                    <div></div>
+                    <button className="button danger" onClick={this.logout}>Logout</button>
+                </footer>
+            </section>
         );
 
         if (this.isAuthenticated) {
             return page;
         } else if (this.state.isLoaded) {
             return (
-                <div className="panel no-auth">
+                <section className="panel no-auth">
                     <h1 className="title">You are not authorized</h1>
+
                     <Link className="link" to="/">Login page</Link>
-                </div>
+                </section>
             );
         } else {
             return null;
