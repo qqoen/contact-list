@@ -31,23 +31,35 @@ export default class ContactListItem extends React.Component<IProps, IState> {
     public render() {
         if (this.state.isEditing) {
             return (
-                <li>
+                <li className="item">
                     <ContactForm
                         contact={this.state.contact}
                         onNameChange={this.onNameChange}
                         onPhoneChange={this.onPhoneChange} />
 
-                    <button className="button" onClick={this.saveContact}>Save</button>
-                    <button className="button" onClick={this.cancelEdit}>Cancel</button>
+                    <div className="flex">
+                        <button className="button primary item" onClick={this.saveContact}>Save</button>
+                        <button className="button item" onClick={this.cancelEdit}>Cancel</button>
+                    </div>
                 </li>
             );
         } else {
             return (
-                <li>
-                    <div>Name: {this.state.contact.name} ({this.state.contact.id}) Phone: {this.state.contact.phone}</div>
+                <li className="item">
+                    <div className="flex">
+                        <label className="label item">Name</label>
+                        <div className="item">{this.state.contact.name}</div>
+                    </div>
 
-                    <button className="button" onClick={this.togleEditContact}>Edit</button>
-                    <button className="button" onClick={this.props.onDelete}>Delete</button>
+                    <div className="flex">
+                        <label className="label item">Phone</label>
+                        <div className="item">{this.state.contact.phone}</div>
+                    </div>
+
+                    <div className="flex">
+                        <button className="button item" onClick={this.togleEditContact}>Edit</button>
+                        <button className="button danger item" onClick={this.props.onDelete}>Delete</button>
+                    </div>
                 </li>
             );
         }
@@ -80,20 +92,20 @@ export default class ContactListItem extends React.Component<IProps, IState> {
         });
     };
 
-    private onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onNameChange = (value: string) => {
         this.setState({
             contact: {
                 ...this.state.contact,
-                name: event.target.value,
+                name: value,
             },
         });
     };
 
-    private onPhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onPhoneChange = (value: string) => {
         this.setState({
             contact: {
                 ...this.state.contact,
-                phone: event.target.value,
+                phone: value,
             },
         });
     }

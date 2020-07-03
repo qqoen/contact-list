@@ -1,3 +1,5 @@
+/* Overrides */
+
 html, body {
     height: 100%;
     color: #333;
@@ -12,6 +14,16 @@ hr {
     border: 1px solid #333;
 }
 
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+/* Custom styles */
+
 .app {
     height: 100%;
     background-color: #eee;
@@ -21,6 +33,9 @@ hr {
     padding: 20px;
     background-color: #fff;
     box-shadow: 1px 1px 4px black;
+}
+.panel.inner {
+    margin-bottom: 20px;
 }
 
 .auth {
@@ -104,5 +119,30 @@ hr {
 .contact-list {
     position: relative;
     top: 10%;
-    margin: 0 10%;
+    margin: 0 auto;
+    width: 40%;
+    min-width: 600px;
+}
+.contact-list .title {
+    margin-bottom: 20px;
+}
+
+.flex {
+    display: flex;
+}
+.flex .item:not(:last-child) {
+    margin-right: 10px;
+}
+
+.label {
+    font-weight: bold;
+}
+.label:after {
+    content: ':';
+}
+
+.list-container {
+    max-height: 300px;
+    overflow: auto;
+    padding: 0 10px;
 }

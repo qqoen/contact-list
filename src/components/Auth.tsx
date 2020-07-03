@@ -33,13 +33,17 @@ export default class Auth extends React.Component<unknown, IState> {
                         type="text"
                         placeholder="Username"
                         className="input"
-                        onChange={this.onUsernameChange} />
+                        name="username"
+                        onChange={this.onChange}
+                        onKeyDown={this.onKeyDown} />
 
                     <input
                         type="password"
                         placeholder="Password"
                         className="input"
-                        onChange={this.onPasswordChange} />
+                        name="password"
+                        onChange={this.onChange}
+                        onKeyDown={this.onKeyDown} />
 
                     <div className="error">{this.state.error}</div>
                 </div>
@@ -71,19 +75,20 @@ export default class Auth extends React.Component<unknown, IState> {
             });
     };
 
-    private onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            username: event.target.value,
-        });
-    };
-
-    private onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            password: event.target.value,
-        });
+            [event.target.name]: event.target.value,
+        } as any);
     };
 
     private isValid() {
         return this.state.username !== '' && this.state.password !== '';
     }
+
+    private onKeyDown = (event: React.KeyboardEvent) => {
+        // On enter
+        if (event.keyCode === 13 && this.isValid()) {
+            this.login();
+        }
+    };
 }
