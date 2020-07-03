@@ -47,13 +47,15 @@ export default class ContactListItem extends React.Component<IProps, IState> {
             return (
                 <li className="item">
                     <div className="flex">
-                        <label className="label item">Name</label>
-                        <div className="item">{this.state.contact.name}</div>
-                    </div>
+                        <div className="flex item">
+                            <label className="label item">Name</label>
+                            <div className="item">{this.state.contact.name}</div>
+                        </div>
 
-                    <div className="flex">
-                        <label className="label item">Phone</label>
-                        <div className="item">{this.state.contact.phone}</div>
+                        <div className="flex item">
+                            <label className="label item">Phone</label>
+                            <div className="item">{this.state.contact.phone}</div>
+                        </div>
                     </div>
 
                     <div className="flex">

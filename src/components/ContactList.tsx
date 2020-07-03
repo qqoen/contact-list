@@ -12,11 +12,11 @@ export interface IState {
     contacts: IContact[];
     newContact: IContact;
     search: string;
+    isLoaded: boolean;
 }
 
 export default class ContactList extends React.Component<unknown, IState> {
     private isAuthenticated = false;
-    private isLoaded = false;
 
     constructor(props: unknown) {
         super(props);
@@ -28,6 +28,7 @@ export default class ContactList extends React.Component<unknown, IState> {
                 phone: '',
             },
             search: '',
+            isLoaded: false,
         };
     }
 
@@ -91,10 +92,10 @@ export default class ContactList extends React.Component<unknown, IState> {
 
         if (this.isAuthenticated) {
             return page;
-        } else if (this.isLoaded) {
+        } else if (this.state.isLoaded) {
             return (
-                <div>
-                    <h1>You are not authorized</h1>
+                <div className="panel no-auth">
+                    <h1 className="title">You are not authorized</h1>
                     <Link className="link" to="/">Login page</Link>
                 </div>
             );
@@ -113,10 +114,15 @@ export default class ContactList extends React.Component<unknown, IState> {
                 this.setState({
                     contacts: data,
                 });
+            }, () => {
+                this.isAuthenticated = false;
             })
             .finally(() => {
                 spinner.stop();
-                this.isLoaded = true;
+
+                this.setState({
+                    isLoaded: true,
+                });
             });
     }
 
