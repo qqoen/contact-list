@@ -83,7 +83,7 @@ export default class ContactList extends React.Component<unknown, IState> {
                         disabled={this.state.search === ''}>Clear</button>
                 </div>
 
-                <ul className="list-container">{contactEls}</ul>
+                <ul className="contact-list-container">{contactEls}</ul>
 
                 <h2 className="title">{contactEls.length === 0 ? 'No contacts' : ''}</h2>
 

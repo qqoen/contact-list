@@ -1,38 +1,9 @@
-.app {
-    height: 100%;
-    background-color: #eee;
-}
+/* General styles */
 
 .panel {
     padding: 20px;
     background-color: #fff;
     box-shadow: 1px 1px 4px black;
-}
-
-.auth {
-    width: 250px;
-    height: 250px;
-    margin: 0 auto;
-    position: relative;
-    top: 25%;
-}
-.auth-header {
-    height: 20%;
-}
-.auth-body {
-    height: 60%;
-}
-.auth-body .input {
-    margin-left: auto;
-    margin-right: auto;
-}
-.auth-footer {
-    height: 20%;
-    display: flex;
-    justify-content: space-around;
-}
-.auth-footer .button {
-    width: 100px;
 }
 
 .title {
@@ -87,17 +58,6 @@
     text-align: center;
 }
 
-.contact-list {
-    position: relative;
-    top: 10%;
-    margin: 0 auto;
-    width: 40%;
-    min-width: 600px;
-}
-.contact-list .title {
-    margin-bottom: 20px;
-}
-
 .flex {
     display: flex;
 }
@@ -113,16 +73,4 @@
 }
 .label:after {
     content: ':';
-}
-
-.list-container {
-    max-height: 300px;
-    overflow: auto;
-    padding: 0 10px;
-}
-
-.no-auth .link {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
 }
