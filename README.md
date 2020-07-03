@@ -1,10 +1,6 @@
 # Contact List
 
-> Contact list app with authorization page and basic CRUD operations
-
-Built with:
-- React
-- React Router
+> Example React app featuring contact list with basic CRUD operations and authorization page
 
 Tested on:
 - node: 10.19.0
@@ -21,7 +17,7 @@ Start json server
 
 `npm run server`
 
-Open browser
+Open browser:
 
 [localhost:1234](http://localhost:1234)
 
