@@ -9,7 +9,7 @@ interface IProp {
     onPhoneChange: (value: string) => void;
 }
 
-export default function ContactForm(props: IProp) {
+export default function ContactForm(props: IProp): JSX.Element {
     const maxInput = 10;
 
     const onNameChange = (e) => {

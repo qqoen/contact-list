@@ -8,7 +8,7 @@ import { spinner } from '../spinner';
 
 interface IProps {
     contact: IContact;
-    onDelete: React.EventHandler<any>;
+    onDelete: React.MouseEventHandler;
 }
 
 interface IState {
@@ -28,7 +28,7 @@ export default class ContactListItem extends React.Component<IProps, IState> {
         };
     }
 
-    public render() {
+    public render(): JSX.Element {
         if (this.state.isEditing) {
             return (
                 <li className="item">

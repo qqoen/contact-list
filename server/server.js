@@ -1,4 +1,7 @@
-const path = require('path')
+/* eslint-env node */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const path = require('path');
 const jsonServer = require('json-server');
 
 const server = jsonServer.create();

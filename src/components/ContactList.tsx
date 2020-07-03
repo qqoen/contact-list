@@ -32,7 +32,7 @@ export default class ContactList extends React.Component<unknown, IState> {
         };
     }
 
-    public render() {
+    public render(): JSX.Element {
         const search = this.state.search.toLocaleLowerCase();
         const contacts = this.state.contacts
             .filter((contact) => {
@@ -104,7 +104,7 @@ export default class ContactList extends React.Component<unknown, IState> {
         }
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         spinner.start();
 
         getContacts()
