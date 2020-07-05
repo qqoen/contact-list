@@ -1,4 +1,6 @@
 import * as React from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 import { IContact } from '../types';
 
@@ -10,21 +12,12 @@ interface IProp {
 }
 
 const maxNameInput = 20;
-const maxPhoneInput = 10;
 
 export default function ContactForm(props: IProp): JSX.Element {
     const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const name = e.target.value.slice(0, maxNameInput);
 
         props.onNameChange(name);
-    };
-
-    const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const phone = e.target.value
-            .replace(/[^0-9]/g, '')
-            .slice(0, maxPhoneInput);
-
-        props.onPhoneChange(phone);
     };
 
     return (
@@ -36,12 +29,12 @@ export default function ContactForm(props: IProp): JSX.Element {
                 value={props.contact.name}
                 onChange={onNameChange} />
 
-            <input
-                className="input item"
-                type="text"
-                placeholder="Phone"
-                value={props.contact.phone}
-                onChange={onPhoneChange} />
+            <div className="item">
+                <PhoneInput
+                    country={'us'}
+                    value={props.contact.phone}
+                    onChange={props.onPhoneChange} />
+            </div>
         </div>
     );
 }

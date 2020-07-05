@@ -202,7 +202,7 @@ export default class ContactList extends React.Component<unknown, IState> {
 
     private isAddFormValid = () => {
         return this.state.newContact.name !== '' &&
-            this.state.newContact.phone !== '';
+            this.state.newContact.phone.length >= 11;
     };
 
     private onClear = () => {

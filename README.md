@@ -1,6 +1,6 @@
 # Contact List
 
-> Example React app featuring contact list with basic CRUD operations and authorization page
+> Example web app featuring contact list with basic CRUD operations and authorization page
 
 Tested on:
 - node: 10.19.0

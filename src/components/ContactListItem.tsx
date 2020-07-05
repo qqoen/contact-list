@@ -38,7 +38,11 @@ export default class ContactListItem extends React.Component<IProps, IState> {
                         onPhoneChange={this.onPhoneChange} />
 
                     <div className="flex">
-                        <button className="button primary item" onClick={this.saveContact}>Save</button>
+                        <button
+                            className="button primary item"
+                            onClick={this.saveContact}
+                            disabled={!this.isFormValid()}>Save</button>
+
                         <button className="button item" onClick={this.cancelEdit}>Cancel</button>
                     </div>
                 </li>
@@ -111,4 +115,9 @@ export default class ContactListItem extends React.Component<IProps, IState> {
             },
         });
     }
+
+    private isFormValid = () => {
+        return this.state.contact.name !== '' &&
+            this.state.contact.phone.length >= 11;
+    };
 }
