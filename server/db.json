@@ -2,8 +2,13 @@
   "contacts": [
     {
       "name": "John Doe",
-      "phone": "232731",
+      "phone": "2327314",
       "id": 1
+    },
+    {
+      "name": "John Floe",
+      "phone": "123321",
+      "id": 2
     }
   ]
 }

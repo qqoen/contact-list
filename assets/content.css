@@ -52,3 +52,10 @@
     margin-top: 10px;
     text-align: center;
 }
+
+@media screen and (max-width: 480px) {
+    .contact-list {
+        min-width: initial;
+        width: 80%;
+    }
+}

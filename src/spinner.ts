@@ -1,5 +1,3 @@
-import { DOMElement } from "react";
-
 class Spinner {
     private readonly el: HTMLElement;
     private readonly cssClass = 'spinner';
