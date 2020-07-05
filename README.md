@@ -5,7 +5,7 @@
 Tested on:
 - node: 10.19.0
 - NPM 6.14.4
-- Firefox 77.0.1
+- Chromium 83, Firefox 77
 
 ## How to start
 
