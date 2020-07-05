@@ -9,6 +9,7 @@ interface IProp {
     contact: IContact;
     onNameChange: (value: string) => void;
     onPhoneChange: (value: string) => void;
+    readOnly: boolean;
 }
 
 const maxNameInput = 20;
@@ -27,13 +28,15 @@ export default function ContactForm(props: IProp): JSX.Element {
                 type="text"
                 placeholder="Name"
                 value={props.contact.name}
-                onChange={onNameChange} />
+                onChange={onNameChange}
+                readOnly={props.readOnly} />
 
             <div className="item">
                 <PhoneInput
                     country={'us'}
                     value={props.contact.phone}
-                    onChange={props.onPhoneChange} />
+                    onChange={props.onPhoneChange}
+                    disabled={props.readOnly} />
             </div>
         </div>
     );

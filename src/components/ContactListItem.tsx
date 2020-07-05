@@ -29,46 +29,35 @@ export default class ContactListItem extends React.Component<IProps, IState> {
     }
 
     public render(): JSX.Element {
-        if (this.state.isEditing) {
-            return (
-                <li className="item">
-                    <ContactForm
-                        contact={this.state.contact}
-                        onNameChange={this.onNameChange}
-                        onPhoneChange={this.onPhoneChange} />
+        const viewControls = (
+            <div className="flex">
+                <button className="button item" onClick={this.togleEditContact}>Edit</button>
+                <button className="button danger item" onClick={this.props.onDelete}>Delete</button>
+            </div>
+        );
 
-                    <div className="flex">
-                        <button
-                            className="button primary item"
-                            onClick={this.saveContact}
-                            disabled={!this.isFormValid()}>Save</button>
+        const editControls = (
+            <div className="flex">
+                <button
+                    className="button primary item"
+                    onClick={this.saveContact}
+                    disabled={!this.isFormValid()}>Save</button>
 
-                        <button className="button item" onClick={this.cancelEdit}>Cancel</button>
-                    </div>
-                </li>
-            );
-        } else {
-            return (
-                <li className="item">
-                    <div className="flex">
-                        <div className="flex item">
-                            <label className="label item">Name</label>
-                            <div className="item">{this.state.contact.name}</div>
-                        </div>
+                <button className="button item" onClick={this.cancelEdit}>Cancel</button>
+            </div>
+        );
 
-                        <div className="flex item">
-                            <label className="label item">Phone</label>
-                            <div className="item">{this.state.contact.phone}</div>
-                        </div>
-                    </div>
+        return (
+            <li className="item">
+                <ContactForm
+                    contact={this.state.contact}
+                    onNameChange={this.onNameChange}
+                    onPhoneChange={this.onPhoneChange}
+                    readOnly={!this.state.isEditing} />
 
-                    <div className="flex">
-                        <button className="button item" onClick={this.togleEditContact}>Edit</button>
-                        <button className="button danger item" onClick={this.props.onDelete}>Delete</button>
-                    </div>
-                </li>
-            );
-        }
+                {this.state.isEditing ? editControls : viewControls}
+            </li>
+        );
     }
 
     private togleEditContact = () => {
