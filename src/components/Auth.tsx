@@ -21,7 +21,7 @@ export default class Auth extends React.Component<unknown, IState> {
         };
     }
 
-    public render() {
+    public render(): JSX.Element {
         return (
             <section className="auth panel">
                 <header className="auth-header">
@@ -34,7 +34,7 @@ export default class Auth extends React.Component<unknown, IState> {
                         placeholder="Username"
                         className="input"
                         name="username"
-                        onChange={this.onChange}
+                        onChange={this.onNameChange}
                         onKeyDown={this.onKeyDown} />
 
                     <input
@@ -42,7 +42,7 @@ export default class Auth extends React.Component<unknown, IState> {
                         placeholder="Password"
                         className="input"
                         name="password"
-                        onChange={this.onChange}
+                        onChange={this.onPasswordChange}
                         onKeyDown={this.onKeyDown} />
 
                     <div className="error">{this.state.error}</div>
@@ -75,10 +75,16 @@ export default class Auth extends React.Component<unknown, IState> {
             });
     };
 
-    private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    private onNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            [event.target.name]: event.target.value,
-        } as any);
+            username: event.target.value,
+        });
+    };
+
+    private onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            password: event.target.value,
+        });
     };
 
     private isValid() {

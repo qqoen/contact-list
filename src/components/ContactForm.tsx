@@ -12,7 +12,7 @@ interface IProp {
 const maxNameInput = 20;
 const maxPhoneInput = 10;
 
-export default function ContactForm(props: IProp) {
+export default function ContactForm(props: IProp): JSX.Element {
     const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const name = e.target.value.slice(0, maxNameInput);
 

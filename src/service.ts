@@ -28,14 +28,14 @@ export function addContact(contact: IContact): Promise<IContact> {
     }).then(responseHandler);
 }
 
-export function deleteContact(id: number) {
+export function deleteContact(id: number): Promise<unknown> {
     return fetch(`${baseUrl}/contacts/${id}`, {
         method: 'DELETE',
         headers: getHeaders(),
     });
 }
 
-export function updateContact(contact: IContact) {
+export function updateContact(contact: IContact): Promise<unknown> {
     return fetch(`${baseUrl}/contacts/${contact.id}`, {
         method: 'PUT',
         headers: getHeaders(),
