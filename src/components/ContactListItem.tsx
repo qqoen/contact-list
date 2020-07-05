@@ -30,14 +30,15 @@ export default class ContactListItem extends React.Component<IProps, IState> {
 
     public render(): JSX.Element {
         const viewControls = (
-            <div className="flex">
+            <div className="flex contact-list-controls">
                 <button className="button item" onClick={this.togleEditContact}>Edit</button>
+
                 <button className="button danger item" onClick={this.props.onDelete}>Delete</button>
             </div>
         );
 
         const editControls = (
-            <div className="flex">
+            <div className="flex contact-list-controls">
                 <button
                     className="button primary item"
                     onClick={this.saveContact}
@@ -48,14 +49,18 @@ export default class ContactListItem extends React.Component<IProps, IState> {
         );
 
         return (
-            <li className="item">
-                <ContactForm
-                    contact={this.state.contact}
-                    onNameChange={this.onNameChange}
-                    onPhoneChange={this.onPhoneChange}
-                    readOnly={!this.state.isEditing} />
+            <li className="item flex">
+                <div className="item">
+                    <ContactForm
+                        contact={this.state.contact}
+                        onNameChange={this.onNameChange}
+                        onPhoneChange={this.onPhoneChange}
+                        readOnly={!this.state.isEditing} />
+                </div>
 
-                {this.state.isEditing ? editControls : viewControls}
+                <div className="it">
+                    {this.state.isEditing ? editControls : viewControls}
+                </div>
             </li>
         );
     }

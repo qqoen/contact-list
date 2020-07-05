@@ -69,7 +69,7 @@ export default class ContactList extends React.Component<unknown, IState> {
 
                 <hr/>
 
-                <div className="flex">
+                <div className="flex contact-list-controls">
                     <input
                         className="input item"
                         type="text"
@@ -89,7 +89,7 @@ export default class ContactList extends React.Component<unknown, IState> {
 
                 <hr/>
 
-                <footer className="flex flex-between">
+                <footer className="flex flex-between contact-list-controls">
                     <div></div>
                     <button className="button danger" onClick={this.logout}>Logout</button>
                 </footer>

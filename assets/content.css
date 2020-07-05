@@ -41,10 +41,15 @@
 .contact-list .title {
     margin-bottom: 20px;
 }
+
 .contact-list-container {
     max-height: 300px;
     overflow: auto;
     padding: 0 10px;
+}
+
+.contact-list-controls button {
+    width: 64px;
 }
 
 .no-auth .link {
@@ -53,7 +58,7 @@
     text-align: center;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
     .contact-list {
         min-width: initial;
         width: 80%;

@@ -6,11 +6,16 @@
     border-color: #333 !important;
     height: 32px !important;
 }
+.react-tel-input .form-control:disabled {
+    border: none;
+    background-color: #eee;
+    cursor: default;
+}
 .react-tel-input .flag-dropdown {
     top: 1px !important;
     bottom: 1px !important;
     left: 1px;
     border: none !important;
     border-radius: 0 !important;
-    background-color: white !important;
+    background-color: #eee !important;
 }
